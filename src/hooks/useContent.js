@@ -3,26 +3,27 @@ import enContent from '../data/content.en.json';
 import mrContent from '../data/content.mr.json';
 
 export const useContent = () => {
-  const [lang, setLang] = useState(localStorage.getItem('lang') || 'en');
+  // Initialize from localStorage or default to 'en'
+  const [language, setLanguage] = useState(localStorage.getItem('lang') || 'en');
 
   useEffect(() => {
-    // Listen for language changes from other components
     const handleLangChange = () => {
-      setLang(localStorage.getItem('lang') || 'en');
+      setLanguage(localStorage.getItem('lang') || 'en');
     };
     window.addEventListener('langUpdated', handleLangChange);
     return () => window.removeEventListener('langUpdated', handleLangChange);
   }, []);
 
   const toggleLanguage = () => {
-    const nextLang = lang === 'en' ? 'mr' : 'en';
+    const nextLang = language === 'en' ? 'mr' : 'en';
     localStorage.setItem('lang', nextLang);
-    setLang(nextLang);
-    // Notify all other instances of this hook to update
+    setLanguage(nextLang);
     window.dispatchEvent(new Event('langUpdated'));
   };
 
-  const content = lang === 'en' ? enContent : mrContent;
+  // Select content based on the current language state
+  const content = language === 'en' ? enContent : mrContent;
 
-  return { content, lang, toggleLanguage };
+  // We return 'language' to match what your RootComponent/Navbar uses
+  return { content, language, toggleLanguage };
 };
