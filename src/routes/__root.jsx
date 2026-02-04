@@ -38,10 +38,10 @@ function RootComponent() {
     <div className="min-h-screen flex flex-col font-sans bg-[#000b1e]"> 
       
       <Navbar 
-        data={content.nav} 
-        onLanguageToggle={toggleLanguage} 
-        currentLang={language} 
-      />
+    data={content.nav} // Ensure your JSON has a "nav" object
+    currentLang={language} 
+    onLanguageToggle={toggleLanguage} 
+  />
 
       <main className="flex-grow">
         <Outlet /> 
