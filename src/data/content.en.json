@@ -1,0 +1,104 @@
+{
+  "meta": {
+    "title": "Aditi & Rohan | The Wedding",
+    "description": "Join us to celebrate our big day!",
+    "hostNumber": "919689569941" 
+  },
+  "theme": {
+    "primaryColor": "rose-600",
+    "secondaryColor": "amber-500",
+    "fontFamily": "Inter",
+    "heroLayout": "split"
+  },
+  "nav": {
+  "home": "Home",
+  "events": "Events",
+  "gallery": "Gallery",
+  "family": "Family",
+  "wishes": "Wishes",
+  "rsvp": "RSVP"
+},
+  "hero": {
+    "scrollText": "Scroll to discover",
+    "greeting": "We are getting married",
+    "couple": "Aditi & Rohan",
+    "date": "December 12, 2025"
+  },
+  "events": [
+  {
+    "id": 1,
+    "title": "Haldi Ceremony",
+    "time": "10:00 AM",
+    "location": "Grand Palace, Nashik",
+    "mapUrl": "https://maps.app.goo.gl/Ug42zHLFdqvpXhsF9"
+  },
+  {
+    "id": 2,
+    "title": "Wedding Ceremony",
+    "time": "06:00 PM",
+    "location": "Royal Orchid, Nashik",
+    "mapUrl": "https://maps.app.goo.gl/aygYsxWkFDYy2dxh8"
+  }
+],
+"rsvp": {
+  "title": "Will You Attend?",
+  "buttonText": "Confirm on WhatsApp",
+  "message": "Hi! I am excited to attend your wedding!"
+},
+"countdown": {
+  "days": "Days",
+  "hours": "Hours",
+  "minutes": "Mins"
+},
+"gallery": {
+  "title": "Our Moments",
+  "images": [
+    "/images/img1.jpeg",
+    "/images/img2.jpeg",
+    "/images/img3.jpeg",
+    "/images/img4.jpeg",
+    "/images/img5.jpg",
+    "/images/img6.jpeg"
+  ]
+},
+"eventSectionTitle": "Wedding Events"
+,
+"intro": {
+  "title": "Meet the Couple",
+  "groom": {
+    "name": "Rohan",
+    "bio": "A tech enthusiast who loves trekking and finding the best Misal Pav in Nashik.",
+    "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d"
+  },
+  "bride": {
+    "name": "Aditi",
+    "bio": "A creative soul and classical dancer with a passion for architecture and travel.",
+    "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330"
+  }
+},"venue": {
+  "title": "Wedding Venues",
+  "locations": [
+    {
+      "name": "The Taj Mahal Palace, Mumbai",
+      "address": "WRCM+M7 Mumbai, Maharashtra",
+      "mapUrl": "https://maps.app.goo.gl/XQJm6fjk9m6AmCr4A"
+    },
+    {
+      "name": "Loano",
+      "address": "17025 Province of Savona Italy",
+      "mapUrl": "https://maps.app.goo.gl/qXX7YJfj9ABfLJuo6"
+    }
+  ]
+},"scroll": "Scroll to discover",
+"family": {
+  "title": "Family Blessings",
+  "groomSide": {
+    "title": "Groom's Family",
+    "members": ["Mr. & Mrs. Rajesh Patil", "Suresh & Sunita Patil", "Rahul & Priya"]
+  },
+  "brideSide": {
+    "title": "Bride's Family",
+    "members": ["Mr. & Mrs. Anil Deshmukh", "Meena & Vijay Deshmukh", "Snehal & Amit"]
+  }
+}
+}

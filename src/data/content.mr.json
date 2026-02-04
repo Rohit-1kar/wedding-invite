@@ -1,0 +1,107 @@
+{
+  "meta": {
+    "title": "अदिती आणि रोहन | विवाह सोहळा",
+    "description": "आमच्या या खास दिनी सहभागी व्हा!",
+    "hostNumber": "919689569941" 
+  },
+
+  "theme": {
+    "primaryColor": "rose-600",
+    "secondaryColor": "amber-500",
+    "fontFamily": "Inter",
+    "heroLayout": "split"
+  },
+
+  "nav": {
+  "home": "मुख्य",
+  "events": "कार्यक्रम",
+  "gallery": "गॅलरी",
+  "family": "परिवार",
+  "wishes": "शुभेच्छा",
+  "rsvp": "होकार"
+},
+
+  "hero": {
+    "scrollText": "अधिक माहितीसाठी खाली जा",
+    "greeting": "आमचा विवाह सोहळा",
+    "couple": "अदिती आणि रोहन",
+    "date": "१२ डिसेंबर २०२५"
+  },
+
+  "events": [
+  {
+    "id": 1,
+    "title": "हळदी समारंभ",
+    "time": "सकाळी १०:०० वाजता",
+    "location": "ग्रँड पॅलेस, नाशिक",
+    "mapUrl": "https://maps.app.goo.gl/Ug42zHLFdqvpXhsF9"
+  },
+  {
+    "id": 2,
+    "title": "शुभ विवाह",
+    "time": "संध्याकाळी ०६:०० वाजता",
+    "location": "रॉयल ऑर्किड, नाशिक",
+    "mapUrl": "https://maps.app.goo.gl/aygYsxWkFDYy2dxh8"
+  }
+],"rsvp": {
+  "title": "तुम्ही येणार का?",
+  "buttonText": "व्हॉट्सॲपवर कळवा",
+  "message": "नमस्कार! तुमच्या लग्नाला यायला मला नक्कीच आवडेल!"
+},
+"countdown": {
+  "days": "दिवस",
+  "hours": "तास",
+  "minutes": "मिनिटे"
+},
+"gallery": {
+  "title": "आमचे क्षण",
+  "images": [
+    "/images/img1.jpeg",
+    "/images/img2.jpeg",
+    "/images/img3.jpeg",
+    "/images/img4.jpeg",
+    "/images/img5.jpg",
+    "/images/img6.jpeg"
+  ]
+},
+"eventSectionTitle": "विवाह सोहळा"
+,"intro": {
+  "title": "वधू-वरांचा परिचय",
+  "groom": {
+    "name": "रोहन",
+    "bio": "एक तंत्रज्ञान प्रेमी ज्याला ट्रेकिंग आणि नाशिकचा उत्तम मिसळपाव शोधायला आवडते.",
+    "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d"
+  },
+  "bride": {
+    "name": "अदिती",
+    "bio": "एक सर्जनशील व्यक्तिमत्व आणि शास्त्रीय नृत्यांगना जिला वास्तुकला आणि प्रवासाची आवड आहे.",
+    "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330"
+  }
+},
+"venue": {
+  "title": "विवाह स्थळ",
+  "locations": [
+    {
+      "name": "ग्रँड पॅलेस (द ग्रँड बॉलरूम)",
+      "address": "४ था मजला, नाशिक सिटी सेंटर मॉल, उंटवाडी रोड, नाशिक",
+      "mapUrl": "https://maps.app.goo.gl/uXvY65GfB87S6XF19"
+    },
+    {
+      "name": "रॉयल ऑर्किड",
+      "address": "आनंद नगर, उपनगर, नाशिक, महाराष्ट्र ४२२००६",
+      "mapUrl": "https://maps.app.goo.gl/k3BvA9Z2p8XyV1Qz8"
+    }
+  ]
+},"scroll": "खाली स्क्रोल करा",
+"family": {
+  "title": "स्नेहांकित आणि निमंत्रक",
+  "groomSide": {
+    "title": "वर पक्ष",
+    "members": ["श्री. आणि श्रीमती राजेश पाटील", "सुरेश आणि सुनीता पाटील", "राहुल आणि प्रिया"]
+  },
+  "brideSide": {
+    "title": "वधू पक्ष",
+    "members": ["श्री. आणि श्रीमती अनिल देशमुख", "मीना आणि विजय देशमुख", "स्नेहल आणि अमित"]
+  }
+}
+}

@@ -1,0 +1,189 @@
+html, body {
+  max-width: 100%;
+  overflow-x: hidden; /* Standard fix for horizontal scroll */
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+#root {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Force every element to calculate width including padding */
+* {
+  box-sizing: border-box;
+}
+
+
+:root {
+  --royal-blue: #000b1e;
+  --royal-blue-light: #001a3d;
+  --gold-primary: #d4af37;
+  --gold-secondary: #fcf6ba;
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(212, 175, 55, 0.2);
+}
+
+body {
+  background-color: var(--royal-blue);
+  color: #f8fafc;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.text-gold {
+  background: linear-gradient(to right, #bf953f, #fcf6ba, #b38728);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: bold;
+}
+/* Ensure the Navbar always stays on top and visible */
+nav.fixed {
+  z-index: 9999 !important;
+  background-color: rgba(0, 11, 30, 0.9) !important; /* Forces dark blue */
+  backdrop-filter: blur(10px);
+}
+
+/* Add padding to the top of the main content so the navbar doesn't cover it */
+main {
+  padding-top: 40px; 
+}
+
+/* Clip all section leaks */
+section, main {
+  overflow: hidden !important;
+  position: relative;
+  width: 100%;
+}
+/* 1. Force the container to be exactly the width of the screen */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  /* This is the key: it hides anything that pokes out the side */
+  overflow-x: hidden !important; 
+  position: relative;
+  /* Stops mobile "bounce" */
+  overscroll-behavior-x: none;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* 2. Force every single element to calculate its width correctly */
+* {
+  box-sizing: border-box !important;
+  /* Optional: uncomment the line below to see exactly what is leaking */
+  /* outline: 1px solid red !important; */
+}
+
+/* 3. Ensure images and sections never push the boundaries */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+section, main {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden !important; /* Clips animations or circles leaking out */
+}
+/* --- RESPONSIVE NAVIGATION TEXT --- */
+.nav-btn {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.7);
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  
+  /* Mobile Size (Default) */
+  font-size: 12px; 
+  letter-spacing: 0.1em;
+}
+
+/* Tablet Size */
+@media (min-min-width: 768px) {
+  .nav-btn {
+    font-size: 14px;
+    letter-spacing: 0.15em;
+  }
+}
+
+/* Laptop/Desktop Size */
+@media (min-width: 1024px) {
+  .nav-btn {
+    font-size: 11px; /* Keeping it elegant but readable */
+    letter-spacing: 0.2em;
+  }
+}
+
+/* --- THE HOVER LINE FIX --- */
+/* We use group-hover logic in Tailwind, but this CSS ensures it works */
+.nav-btn::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1.5px;
+  bottom: -5px;
+  left: 50%; /* Start from center */
+  background-color: var(--gold-primary);
+  transition: all 0.3s ease;
+  transform: translateX(-50%); /* Keeps it centered */
+}
+
+.nav-btn:hover::after {
+  width: 100%;
+}
+
+.nav-btn:hover {
+  color: var(--gold-primary) !important;
+}
+
+/* Unify all section backgrounds */
+section, 
+.event-section, 
+.menu-section, 
+.gallery-section {
+  background-color: #000b1e !important;
+  color: #ffffff;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Specific Gold Border for Gallery Images */
+.movement-img-container {
+  border: 2px solid #d4af37; /* Royal Gold */
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movement-img-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
+}
+/* This forces every section of your invite to use the Royal Blue */
+section {
+  background-color: #000b1e !important;
+}

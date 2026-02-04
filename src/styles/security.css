@@ -1,0 +1,19 @@
+/* Disable User Interaction */
+.secure-content {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+/* Protect Images */
+.secure-img {
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
+
+/* Print Protection */
+@media print {
+  body { display: none !important; }
+}
