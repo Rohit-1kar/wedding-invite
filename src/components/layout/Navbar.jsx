@@ -1,11 +1,10 @@
-import { useState, useEffect } from 'react'; // Added useEffect
+import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
 export default function Navbar({ data, onLanguageToggle, currentLang }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false); // Logic: Track scroll state
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  // Logic: Scroll listener from Second Code
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -14,11 +13,13 @@ export default function Navbar({ data, onLanguageToggle, currentLang }) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // 1. & 2. Added Couple and re-ordered to match IndexComponent sequence
   const navLinks = [
     { id: 'hero', label: data?.home || (currentLang === 'en' ? 'Home' : 'होम') },
-    { id: 'events', label: data?.events || (currentLang === 'en' ? 'Events' : 'कार्यक्रम') },
-    { id: 'gallery', label: data?.gallery || (currentLang === 'en' ? 'Gallery' : 'गॅलरी') },
+    { id: 'intro', label: currentLang === 'en' ? 'Couple' : 'दांपत्य' }, // New link
     { id: 'family', label: data?.family || (currentLang === 'en' ? 'Family' : 'परिवार') },
+    { id: 'gallery', label: data?.gallery || (currentLang === 'en' ? 'Gallery' : 'गॅलरी') },
+    { id: 'events', label: data?.events || (currentLang === 'en' ? 'Events' : 'कार्यक्रम') },
     { id: 'rsvp', label: data?.rsvp || (currentLang === 'en' ? 'RSVP' : 'आर.एस.व्ही.पी') },
   ];
 
@@ -34,11 +35,10 @@ export default function Navbar({ data, onLanguageToggle, currentLang }) {
     <nav 
       className={`fixed top-0 left-0 right-0 w-full z-[9999] flex items-center justify-between px-6 transition-all duration-300 border-b ${
         isScrolled 
-          ? "h-16 bg-[#000b1e] border-gold/30 shadow-lg" // Scrolled state: smaller height, more border
-          : "h-20 bg-[#000b1e]/90 backdrop-blur-md border-gold/10" // Top state: taller, more transparent
+          ? "h-16 bg-[#000b1e] border-gold/30 shadow-lg" 
+          : "h-20 bg-[#000b1e]/90 backdrop-blur-md border-gold/10"
       }`}
     >
-      {/* Brand Logo */}
       <div 
         className={`font-serif font-bold text-2xl tracking-tighter cursor-pointer transition-colors ${
           isScrolled ? "text-gold" : "text-white"
@@ -48,7 +48,6 @@ export default function Navbar({ data, onLanguageToggle, currentLang }) {
         A & R
       </div>
 
-      {/* Desktop Navigation */}
       <div className="hidden lg:flex gap-8">
         {navLinks.map((link) => (
           <button 
@@ -63,7 +62,6 @@ export default function Navbar({ data, onLanguageToggle, currentLang }) {
         ))}
       </div>
 
-      {/* Language Switcher & Mobile Toggle */}
       <div className="flex items-center gap-4 relative z-[10000]">
         <button 
           onClick={onLanguageToggle} 
@@ -88,9 +86,9 @@ export default function Navbar({ data, onLanguageToggle, currentLang }) {
         </button>
       </div>
 
-      {/* Mobile Menu Overlay - Logic: Stays dark to match your UI */}
+      {/* 3. Fixed Mobile Menu Overlay Visibility */}
       {isOpen && (
-        <div className="fixed top-0 left-0 w-full h-screen bg-[#000b1e] z-[9998] flex flex-col items-center justify-center gap-10 lg:hidden animate-in fade-in duration-300">
+        <div className="fixed top-0 left-0 w-full h-screen bg-[#000b1e] z-[9998] flex flex-col items-center justify-center gap-10 animate-in fade-in duration-300">
           {navLinks.map((link) => (
             <button 
               key={link.id} 
