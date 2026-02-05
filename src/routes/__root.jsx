@@ -3,6 +3,7 @@ import { createRootRoute, Outlet } from '@tanstack/react-router';
 import { useContent } from '../hooks/useContent.js';
 import Navbar from '../components/layout/Navbar.jsx';
 import MusicPlayer from '../components/ui/MusicPlayer.jsx';
+import Footer from '../components/sections/Footer';
 
 export const Route = createRootRoute({
   component: RootComponent,
@@ -46,16 +47,11 @@ function RootComponent() {
       <main className="flex-grow">
         <Outlet /> 
       </main>
-
-      <MusicPlayer audioUrl="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" />
+        <Footer />
+      <MusicPlayer audioUrl="/wedding-song.mp3" />
       
       {/* Footer updated to Royal Blue Theme */}
-      <footer className="py-10 text-center bg-[#000814] border-t border-gold/10 text-white/30 text-sm">
-        <p className="mb-2">© 2026 Aditi & Rohan</p>
-        <p className="text-[10px] uppercase tracking-[0.3em] text-gold/50">
-          Digital Invite Protected by InviteDev.in
-        </p>
-      </footer>
+      
     </div>
   );
 }
