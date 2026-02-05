@@ -15,7 +15,7 @@ export default function Rsvp({ data }) {
     e.preventDefault();
     setSubmitStatus('Sending...');
     
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwTMgan2lMMY-5StkMljNM2CoFd45WN9S6g_JZ17t82FlRQ__oNsDt4KnWCtlpppM3kjw/exec'; 
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbx_TLP0Kkb0nB6J15pSJtaj5qImr0S8PU7-Jhnjs5krz7DIX7E7BCF6o_TNWP_u4Qfw/exec'; 
 
     try {
       await fetch(scriptURL, {
