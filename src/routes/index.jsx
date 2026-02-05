@@ -34,7 +34,10 @@ function IndexComponent() {
 
       <Countdown targetDate="2046-12-12T00:00:00" labels={content.countdown} />
       
-      <Intro data={content.intro} />
+      {/* In IndexComponent.jsx */}
+<section id="intro">
+  <Intro data={content.intro} />
+</section>
 
       <section id="family">
         <Family data={content.family} />
