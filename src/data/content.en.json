@@ -100,5 +100,20 @@
     "title": "Bride's Family",
     "members": ["Mr. & Mrs. Anil Deshmukh", "Meena & Vijay Deshmukh", "Snehal & Amit"]
   }
-}
+},
+"marketing": {
+    "brandName": "InviteDev",
+    "tagline": "Digital Invitations Redefined",
+    "shareTitle": "Share the Joy",
+    "shareMsg": { 
+      "title": "Wedding Invitation", 
+      "desc": "We are getting married! Click the link below to view our digital invite and RSVP." 
+    },
+    "services": ["Digital Wedding Cards", "RSVP Tracking System", "Music Integration", "Custom Themes"],
+    "trust": "Secure • Fast • Elegant",
+    "ctaTitle": "Want your own digital invite?",
+    "ctaBtn": "Contact Us on WhatsApp",
+    "whatsappLink": "https://wa.me/yournumber",
+    "copyright": "© 2026 Aditi & Rohan • Designed by InviteDev.in"
+  }
 }
