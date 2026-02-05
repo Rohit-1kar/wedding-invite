@@ -5,6 +5,9 @@ export default function MusicPlayer({ audioUrl }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
 
+ 
+  
+
   const toggleMusic = () => {
     if (isPlaying) {
       audioRef.current.pause();
@@ -21,7 +24,7 @@ export default function MusicPlayer({ audioUrl }) {
       <button
         onClick={toggleMusic}
         className={`p-4 rounded-full shadow-2xl transition-all duration-500 flex items-center justify-center ${
-          isPlaying ? 'bg-rose-500 animate-spin-slow' : 'bg-stone-800'
+          isPlaying ? 'bg-green-500 animate-spin-slow' : 'bg-stone-800'
         } text-white`}
       >
         {isPlaying ? <Volume2 size={24} /> : <VolumeX size={24} />}
