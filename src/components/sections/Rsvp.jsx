@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
 export default function Rsvp({ data }) {
-  const [formData, setFormData] = useState({ name: '', guests: '1' });
+  // 1. Updated state to include 'wishes'
+  const [formData, setFormData] = useState({ name: '', guests: '1', wishes: '' });
   const [loveCount, setLoveCount] = useState(1000);
   const [submitStatus, setSubmitStatus] = useState('');
 
@@ -19,10 +20,12 @@ export default function Rsvp({ data }) {
     try {
       await fetch(scriptURL, {
         method: 'POST',
+        // 2. URLSearchParams(formData) will now automatically include 'wishes'
         body: new URLSearchParams(formData),
       });
       setSubmitStatus('Details Saved! ♥');
-      setFormData({ name: '', guests: '1' });
+      // 3. Reset form including wishes
+      setFormData({ name: '', guests: '1', wishes: '' });
     } catch (error) {
       setSubmitStatus('Details Sent!');
     }
@@ -31,9 +34,6 @@ export default function Rsvp({ data }) {
   return (
     <section id="rsvp" className="py-20 bg-[#000b1e] text-white border-t border-gold/10">
       <div className="max-w-3xl mx-auto px-6 text-center">
-        
-        
-
         
         {/* --- GUEST FORM --- */}
         <div className="bg-white/5 p-8 rounded-3xl border border-gold/20 backdrop-blur-md text-left shadow-2xl">
@@ -62,21 +62,31 @@ export default function Rsvp({ data }) {
               />
             </div>
 
+            {/* 4. ADDED WISHES TEXT BOX */}
+            <div>
+              <label className="block text-gold/80 text-xs mb-2 uppercase tracking-[0.2em] font-semibold">Your Wishes</label>
+              <textarea
+                value={formData.wishes}
+                onChange={(e) => setFormData({ ...formData, wishes: e.target.value })}
+                className="w-full bg-[#000b1e]/50 border border-gold/30 rounded-xl px-4 py-4 text-white focus:border-gold outline-none transition-all min-h-[100px] resize-none"
+                placeholder="Leave a message for the couple..."
+              />
+            </div>
+
             <motion.button
-  type="submit"
-  whileHover={{ 
-    scale: 1.02, 
-    // We use a dark background so the gold text stays visible
-    backgroundColor: "#00153d", 
-    color: "#d4af37", // Text stays Gold
-    borderColor: "#d4af37",
-    boxShadow: "0 0 25px rgba(212, 175, 55, 0.4)" 
-  }}
-  whileTap={{ scale: 0.98 }}
-  className="w-full bg-transparent border-2 border-gold text-gold font-black py-4 rounded-xl transition-colors duration-300 uppercase tracking-widest text-sm"
->
-  Confirm RSVP Details
-</motion.button>
+              type="submit"
+              whileHover={{ 
+                scale: 1.02, 
+                backgroundColor: "#00153d", 
+                color: "#d4af37", 
+                borderColor: "#d4af37",
+                boxShadow: "0 0 25px rgba(212, 175, 55, 0.4)" 
+              }}
+              whileTap={{ scale: 0.98 }}
+              className="w-full bg-transparent border-2 border-gold text-gold font-black py-4 rounded-xl transition-colors duration-300 uppercase tracking-widest text-sm"
+            >
+              Confirm RSVP Details
+            </motion.button>
 
             {submitStatus && (
               <p className="text-center mt-4 text-gold font-medium animate-pulse">
