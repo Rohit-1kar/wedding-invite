@@ -1,92 +1,40 @@
-import React, { useState, useEffect } from "react";
-import { Share2, MessageCircle, Copy, Check, Loader2 } from "lucide-react";
-// 1. Change this import to use your existing hook
+import React, { useState } from "react";
+import { Share2, MessageCircle, Copy, Check } from "lucide-react";
 import { useContent } from "../../hooks/useContent"; 
 
 const Footer = () => {
-  // 2. Change useLanguage() to useContent()
-  const { content, language } = useContent(); 
-  
-  // The rest of your destructuring stays the same
-  const { marketing, couple, images } = content;
+  const { content } = useContent(); 
+  const { marketing } = content;
   
   const [copied, setCopied] = useState(false);
-  const [isSharing, setIsSharing] = useState(false);
-  const [shareableFile, setShareableFile] = useState(null);
+
+  // --- Updated Share Logic ---
+  const liveWebsiteUrl = "https://royal-black.netlify.app/";
 
   // ==========================================
-  // 1. THE MAGIC: PRE-LOAD IMAGE AS A FILE
+  // 2. WHATSAPP SHARE LOGIC (Direct & Fast)
   // ==========================================
-  useEffect(() => {
-    const prepareShareImage = async () => {
-      // We use the 'hero' image for the invitation card
-      const imageUrl = images?.hero; 
-      if (!imageUrl) return;
-
-      try {
-        // Fetch the image from your public folder
-        const response = await fetch(imageUrl);
-        // Convert it to a "Blob" (Binary Large Object)
-        const blob = await response.blob();
-        // Create a fake "File" object that the browser can share
-        const file = new File([blob], "wedding-invitation.jpg", { type: "image/jpeg" });
-        
-        setShareableFile(file);
-      } catch (error) {
-        console.error("Could not load image for sharing:", error);
-      }
-    };
+  const shareOnWhatsApp = () => {
+    // ✨ is \u2728, 💍 is \ud83d\udc8d
+    const sparkles = "\u2728";
+    const ring = "\ud83d\udc8d";
     
-    prepareShareImage();
-  }, [images]);
+    const fullMessage = `**Wedding Invitation** \n\n` +
+                        `We are happy to invite you to the wedding of *Sophia & Alexander*! \n\n` +
+                        `Check the invitation here:\n${liveWebsiteUrl}`;
 
-  // ==========================================
-  // 2. WHATSAPP SHARE LOGIC
-  // ==========================================
-  const shareOnWhatsApp = async () => {
-    setIsSharing(true);
-
-    const title = `*${couple.groom} & ${couple.bride}* ${marketing.shareMsg.title}`;
-    const desc = marketing.shareMsg.desc;
-    const url = window.location.href;
-    
-    // The text block
-    const fullMessage = `${title}\n\n${desc}\n${url}`;
-
-    try {
-      // CHECK: Does browser support sharing files? (Mostly Mobile)
-      if (
-        navigator.share && 
-        shareableFile && 
-        navigator.canShare && 
-        navigator.canShare({ files: [shareableFile] })
-      ) {
-        // SHARE IMAGE + TEXT
-        await navigator.share({
-          files: [shareableFile], // The Image
-          title: title,           // System Title
-          text: fullMessage,      // The Caption (includes link)
-        });
-      } else {
-        // FALLBACK: If Native Share fails (Desktop), share TEXT ONLY via WhatsApp Web
-        throw new Error("Native file sharing not supported on this device.");
-      }
-    } catch (error) {
-      // Fallback to simple link sharing
-      window.open(`https://wa.me/?text=${encodeURIComponent(fullMessage)}`, "_blank");
-    } finally {
-      setIsSharing(false);
-    }
+    const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(fullMessage)}`;
+    window.open(whatsappUrl, '_blank');
   };
 
   // --- 3. COPY LINK LOGIC ---
   const copyToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(window.location.href);
+      await navigator.clipboard.writeText(liveWebsiteUrl);
       setCopied(true);
     } catch (err) {
       const textArea = document.createElement("textarea");
-      textArea.value = window.location.href;
+      textArea.value = liveWebsiteUrl;
       document.body.appendChild(textArea);
       textArea.select();
       document.execCommand("copy");
@@ -96,14 +44,11 @@ const Footer = () => {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  // QR Code
   const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=10&color=000000&bgcolor=FFFFFF&data=${encodeURIComponent(marketing.whatsappLink)}`;
 
   return (
-    /* Background matches your navy blue theme */
     <footer className="relative pt-20 pb-10 bg-[#000b1e] text-stone-300 overflow-hidden font-sans border-t border-white/5">
       
-      {/* Decorative Gradient */}
       <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-gold to-transparent opacity-60"></div>
       <div className="absolute bottom-0 right-0 w-125 h-125 bg-primary/10 rounded-full blur-[120px] pointer-events-none" />
 
@@ -121,20 +66,10 @@ const Footer = () => {
             {/* WHATSAPP BUTTON */}
             <button
               onClick={shareOnWhatsApp}
-              disabled={isSharing}
-              className="group cursor-pointer flex items-center justify-center gap-3 px-8 py-4 rounded-full font-bold transition-all hover:-translate-y-1 shadow-lg shadow-green-900/20 w-full sm:w-auto active:scale-95 disabled:opacity-70 bg-green-600 text-white hover:bg-green-500"
+              className="group cursor-pointer flex items-center justify-center gap-3 px-8 py-4 rounded-full font-bold transition-all hover:-translate-y-1 shadow-lg bg-green-600 text-white hover:bg-green-500 active:scale-95"
             >
-              {isSharing ? (
-                <>
-                  <Loader2 size={20} className="animate-spin" />
-                  <span>Preparing...</span>
-                </>
-              ) : (
-                <>
-                  <Share2 size={20} />
-                  <span>WhatsApp</span>
-                </>
-              )}
+              <Share2 size={20} />
+              <span>WhatsApp</span>
             </button>
 
             {/* COPY BUTTON */}
@@ -176,8 +111,6 @@ const Footer = () => {
              <div className="absolute inset-0 bg-gold/20 blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-700"></div>
              <div className="bg-[#151515] rounded-xl p-6 flex flex-col items-center text-center h-full relative z-10">
                 <p className="text-xs font-bold text-stone-400 mb-4 uppercase tracking-widest">{marketing.ctaTitle}</p>
-                
-                {/* FIXED HOVER TEXT COLOR BELOW: hover:text-[#000b1e] */}
                 <a
                   href={marketing.whatsappLink}
                   target="_blank"
@@ -187,10 +120,9 @@ const Footer = () => {
                   <MessageCircle size={18} />
                   {marketing.ctaBtn}
                 </a>
-
                 <div className="flex items-center gap-4 bg-white p-2 rounded-lg w-full mt-auto">
                   <div className="bg-white p-1 rounded-md border border-stone-200 shrink-0">
-                    <img src={qrUrl} alt="Scan to Chat" className="w-14 h-14 object-contain" loading="lazy" />
+                    <img src={qrUrl} alt="Scan to Chat" className="w-14 h-14 object-contain" />
                   </div>
                   <div className="text-left">
                     <p className="text-[10px] text-stone-900 font-extrabold uppercase mb-0.5">Scan to Chat</p>
@@ -201,13 +133,8 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* COPYRIGHT */}
-        <div className="border-t border-white/5 pt-8 text-center flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="border-t border-white/5 pt-8 text-center">
           <p className="text-stone-600 text-xs">{marketing.copyright}</p>
-          <div className="flex gap-4 text-xs text-stone-600">
-             <a href="#" className="hover:text-gold transition-colors">Privacy Policy</a>
-             <a href="#" className="hover:text-gold transition-colors">Terms of Use</a>
-          </div>
         </div>
       </div>
     </footer>
