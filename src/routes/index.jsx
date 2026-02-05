@@ -9,7 +9,8 @@ import Gallery from '../components/sections/Gallery.jsx';
 import Intro from '../components/sections/Intro.jsx';
 import Promotion from '../components/sections/Promotion.jsx';
 import Family from '../components/sections/Family.jsx';
-import Wishes from '../components/sections/Wishes.jsx';
+import Wishes from '../components/sections/Footer.jsx';
+import Footer from '../components/sections/Footer.jsx';
 
 export const Route = createFileRoute('/')({
   component: IndexComponent,
@@ -57,7 +58,8 @@ function IndexComponent() {
         <Rsvp data={content.rsvp} hostNumber={content.meta.hostNumber} />
       </section>
 
-      <Promotion />
+     
+      
     </main>
   );
 }
