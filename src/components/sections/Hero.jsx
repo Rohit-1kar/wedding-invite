@@ -1,86 +1,120 @@
-import { motion } from 'framer-motion';
+import React from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Calendar, MapPin, ChevronDown } from "lucide-react";
 
 export default function Hero({ data }) {
   if (!data) return null;
 
-  // Define attractive colors for the twinkling dots
-  const starColors = ["#d4af37", "#ffffff", "#818cf8", "#fde047"];
+  // Parallax effect for the background
+  const { scrollY } = useScroll();
+  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
   return (
-    <section className="relative h-[calc(100vh-110px)] w-full flex flex-col items-center justify-center bg-[#000b1e] overflow-hidden">
-      
-      {/* --- ENHANCED MULTI-COLOR BACKGROUND --- */}
-      <div className="absolute inset-0 pointer-events-none">
-        
-        {/* Animated Multi-color Stars - Increased count and size */}
-        {[...Array(50)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full"
-            initial={{ opacity: 0.1 }}
-            animate={{ 
-              opacity: [0.1, 0.6, 0.1],
-              scale: [1, 1.3, 1] 
-            }}
-            transition={{ 
-              duration: Math.random() * 5 + 3, 
-              repeat: Infinity, 
-              delay: Math.random() * 5 
-            }}
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-              // INCREASED SIZE: Randomly between 4px and 8px
-              width: `${Math.random() * 4 + 4}px`, 
-              height: `${Math.random() * 4 + 4}px`,
-              backgroundColor: starColors[i % starColors.length],
-              // STRONGER GLOW: Increased blur and opacity
-              boxShadow: `0 0 12px ${starColors[i % starColors.length]}aa`, 
-            }}
-          />
-        ))}
-
-        {/* Soft Background Glows */}
-        <div className="absolute -top-24 -left-24 w-[500px] h-[500px] rounded-full bg-[#d4af37]/10 blur-[120px]" />
-        <div className="absolute -bottom-48 -right-24 w-[600px] h-[600px] rounded-full bg-indigo-500/10 blur-[150px]" />
-        
-        {/* Center Vignette */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_20%,_#000b1e_90%)]" />
-      </div>
-
-      {/* --- CONTENT --- */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
-        className="relative z-10 text-center px-4"
+    <section id="hero" className="relative h-[100dvh] w-full overflow-hidden bg-[#0a0a0a] -mt-16">
+      {/* --- BACKGROUND LAYER --- */}
+      <motion.div 
+        style={{ y: y1 }} 
+        className="absolute inset-0 z-0"
       >
-        <p className="text-[#d4af37] uppercase tracking-[0.4em] text-xs md:text-sm font-medium mb-6">
-          {data.greeting || "THE WEDDING OF"}
-        </p>
+        <picture>
+          {/* Mobile Image: Vertical 9:16 aspect ratio */}
+          <source
+            media="(max-width: 768px)"
+            srcSet={data.heroImageMobile || "/images/mobi.jpg"}
+          />
+          {/* Desktop Image: Horizontal 16:9 aspect ratio */}
+          <img
+            src={data.heroImageDesktop || "/images/desktop.jpg"}
+            alt="Wedding Hero"
+            className="h-full w-full object-cover brightness-[0.85]"
+          />
+        </picture>
         
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-white mb-6 leading-tight drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)]">
-          {data.couple}
-        </h1>
-
-        <div className="flex items-center justify-center gap-4 mb-8 opacity-80">
-          <div className="h-[1px] w-12 bg-gradient-to-r from-transparent to-[#d4af37]" />
-          <span className="text-[#d4af37] text-xl">♥</span>
-          <div className="h-[1px] w-12 bg-gradient-to-l from-transparent to-[#d4af37]" />
-        </div>
-
-        <p className="text-xl md:text-2xl text-stone-300 italic font-light tracking-wide">
-          {data.date}
-        </p>
+        {/* Artistic Overlays */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-[#0a0a0a]" />
+        <div className="absolute inset-0 bg-black/10" />
       </motion.div>
 
-      {/* Scroll Indicator */}
+      {/* --- DESIGNER FRAME (Visible on Desktop) --- */}
+      <div className="absolute inset-6 border border-white/20 z-10 pointer-events-none hidden md:block" />
+
+      {/* --- CONTENT LAYER --- */}
       <motion.div 
-        animate={{ y: [0, 10, 0] }} 
-        transition={{ repeat: Infinity, duration: 2 }}
-        className="absolute bottom-10 text-[#d4af37]/60 text-[10px] tracking-[0.3em] uppercase"
+        style={{ opacity }}
+        className="relative z-20 h-full flex flex-col items-center justify-center text-center px-6 pt-16"
       >
-        Scroll Down
+        {/* Save The Date Tag */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="mb-6"
+        >
+          <span className="px-4 py-1.5 border border-[#d4af37]/50 rounded-full text-[#d4af37] text-xs md:text-sm tracking-[0.4em] uppercase backdrop-blur-sm bg-black/20">
+            Save the Date
+          </span>
+        </motion.div>
+
+        {/* The Names (Main Heading) */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.2 }}
+        >
+          <h1 className="font-serif text-6xl md:text-9xl text-white mb-2 drop-shadow-2xl">
+            {data.coupleNames || "Rohan & Aditi"}
+          </h1>
+          <div className="h-[1px] w-24 md:w-48 bg-[#d4af37] mx-auto my-6" />
+        </motion.div>
+
+        {/* Date & Location Grid */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6, duration: 1 }}
+          className="flex flex-col md:flex-row items-center gap-4 md:gap-12 text-white/90"
+        >
+          <div className="flex items-center gap-3">
+            <Calendar className="w-5 h-5 text-[#d4af37]" />
+            <span className="text-lg md:text-xl font-light tracking-widest uppercase">
+              {data.date || "24 . 12 . 2025"}
+            </span>
+          </div>
+          <div className="hidden md:block w-1.5 h-1.5 rounded-full bg-[#d4af37]" />
+          <div className="flex items-center gap-3">
+            <MapPin className="w-5 h-5 text-[#d4af37]" />
+            <span className="text-lg md:text-xl font-light tracking-widest uppercase">
+              {data.location || "Udaipur, Rajasthan"}
+            </span>
+          </div>
+        </motion.div>
+
+        {/* Decorative Quote */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.7 }}
+          transition={{ delay: 1, duration: 1 }}
+          className="mt-12 text-white italic font-serif text-sm md:text-lg max-w-xs md:max-w-md"
+        >
+          "In the middle of a dream, we found each other."
+        </motion.p>
+      </motion.div>
+
+      {/* --- SCROLL INDICATOR --- */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
+      >
+        <p className="text-[10px] text-white/50 tracking-[0.3em] uppercase">Scroll</p>
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 2 }}
+        >
+          <ChevronDown className="text-white/50 w-6 h-6" />
+        </motion.div>
       </motion.div>
     </section>
   );
