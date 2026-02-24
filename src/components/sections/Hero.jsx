@@ -21,7 +21,7 @@ export default function Hero({ data }) {
           {/* Mobile Image: Vertical 9:16 aspect ratio */}
           <source
             media="(max-width: 768px)"
-            srcSet={data.heroImageMobile || "/images/mobi.jpg"}
+            srcSet={data.heroImageMobile || "/images/mobi.webp"}
           />
           {/* Desktop Image: Horizontal 16:9 aspect ratio */}
           <img
